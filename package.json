@@ -1,0 +1,53 @@
+{
+  "name": "mailman-tasks",
+  "version": "0.1.0",
+  "description": "Node.js client for Mailman's Tasks API: get the verification code or link from an email, for bots.",
+  "keywords": ["mailman", "verification code", "otp", "email", "bot", "tasks api", "aycd"],
+  "license": "MIT",
+  "author": "Mailman",
+  "homepage": "https://getmailman.app/developers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chefsonya/mailman-tasks-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chefsonya/mailman-tasks-node/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prepack": "node scripts/build.mjs",
+    "typecheck": "node scripts/build.mjs && tsc -p tsconfig.test.json --noEmit",
+    "test": "node scripts/test.mjs",
+    "test:unit": "node scripts/test.mjs --no-build",
+    "prepublishOnly": "npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "typescript": "^5.9.3"
+  }
+}

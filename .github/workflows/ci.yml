@@ -1,0 +1,37 @@
+name: CI
+
+# Typecheck and unit tests on every supported Node version. The tests run against a mock HTTP server in the
+# test process, so they need no network, no API key and no Mailman.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      # Builds the ESM and CommonJS bundles and typechecks the sources and the tests.
+      - run: npm run typecheck
+      # Compiles the tests, runs them with node:test, and loads both bundles by package name.
+      - run: npm test
+      # What would be published: only dist, README, LICENSE and package.json.
+      - run: npm pack --dry-run
