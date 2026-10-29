@@ -39,7 +39,7 @@ const { MailmanTasks, codeTask } = require("mailman-tasks"); // CommonJS
 
 ## Get your API key
 
-The key is the user's own, from their Mailman: **Settings → API & agents → Tasks API → Copy**. Tasks are answered
+The key is the user's own, from their Mailman: **Settings → Tasks API → Copy**. Tasks are answered
 by that person's Mailman, so it has to be **open** (signed in and connected) while your bot waits. If it isn't, or
 the key is wrong, the API answers `401` and the client throws `AuthError` ("The key was rejected, or Mailman isn't
 open on your computer."). Read the key from your configuration; the client never logs it, never puts it in a URL, and
