@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0 (2026-10-31)
+
+- **Breaking:** `linkTask` names its element and result key `loginUrl` instead of `link`, matching Go, Python and the public guide. Update reads to `results.loginUrl`.
+- Add regression tests for success without results and non-JSON HTTP error answers.
+
 ## 0.1.0 (2026-10-29)
 
 First release: the Node.js client for [Mailman's Tasks API](https://getmailman.app/developers).

@@ -94,7 +94,7 @@ describe("nothing hidden between the client and the wire", { concurrency: true }
     await client.verify();
     const { headers } = api.requests("verify")[0]!;
     assert.equal(headers.authorization, `Token ${api.key}`, "the word Token, a space, the key (M1)");
-    assert.equal(headers["user-agent"], "mailman-tasks-node/0.1.0");
+    assert.equal(headers["user-agent"], "mailman-tasks-node/0.2.0");
     assert.equal(headers.accept, "application/json");
   });
 
@@ -118,7 +118,7 @@ describe("nothing hidden between the client and the wire", { concurrency: true }
     assert.ok(calls[0]!.init.signal, "every request carries a signal for its timeout");
     assert.deepEqual(calls[0]!.init.headers, {
       Authorization: `Token ${KEY}`,
-      "User-Agent": "mailman-tasks-node/0.1.0",
+      "User-Agent": "mailman-tasks-node/0.2.0",
       Accept: "application/json",
     });
   });

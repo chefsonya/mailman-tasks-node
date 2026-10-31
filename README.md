@@ -25,6 +25,11 @@ console.log("code:", results.code);
   [getmailman.app/tasks-api.md](https://getmailman.app/tasks-api.md).
 - Needs Mailman 0.1.35 or newer on the user's computer, signed in, open and connected: that is what answers the tasks.
 
+## Breaking change in 0.2.0
+
+`linkTask` now names its element `loginUrl`, matching the Go and Python SDKs and the guide.
+Read `results.loginUrl` instead of `results.link` when upgrading from 0.1.0.
+
 ## Installation
 
 ```sh
@@ -76,7 +81,7 @@ try {
   }
 }
 
-// A login link instead of a code: results.link
+// A login link instead of a code: results.loginUrl
 const { results } = await mailman.run(
   linkTask({ email: "alias@example.com", from: "noreply@example.com", subjectIncludes: "Sign in", linkIncludes: "/login" }),
 );
@@ -118,7 +123,7 @@ new MailmanTasks(apiKey, options?)
 | `baseUrl` | `https://tasks.getmailman.app` | For tests and advanced use. Plain `http` is accepted only for `localhost`. |
 | `requestTimeoutMs` | `15000` | Total timeout of every HTTP request, from its start: connecting, the headers and the whole body. Besides `close()`, it is the only thing that ends a poll in flight. |
 | `fetch` | Node's `http`/`https` | Inject your own, for tests. The default sends one request per connection, follows no redirects and never replays a request; a `fetch` you pass is used as it is (Node's global one re-sends a request once after a 421, outside this client's pacing). |
-| `userAgent` | `mailman-tasks-node/0.1.0` | |
+| `userAgent` | `mailman-tasks-node/0.2.0` | |
 | `timing`, `limits` | the API's rules | See [Testing your code](#testing-your-code). |
 
 | Method | |

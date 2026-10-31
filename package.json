@@ -1,6 +1,6 @@
 {
   "name": "mailman-tasks",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Node.js client for Mailman's Tasks API: get the verification code or link from an email, for bots.",
   "keywords": ["mailman", "verification code", "otp", "email", "bot", "tasks api", "aycd"],
   "license": "MIT",

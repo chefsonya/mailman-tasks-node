@@ -51,7 +51,7 @@ export function codeTask(options: CodeTaskOptions): TaskInput {
   };
 }
 
-/** A task that extracts a link: the address of the first body link whose href includes `linkIncludes`. The result is `results.link`. */
+/** A task that extracts a link: the address of the first body link whose href includes `linkIncludes`. The result is `results.loginUrl`. */
 export function linkTask(options: LinkTaskOptions): TaskInput {
   const { email, from, subjectIncludes, linkIncludes, ...extras } = options;
   if (typeof linkIncludes !== "string" || linkIncludes === "") {
@@ -65,7 +65,7 @@ export function linkTask(options: LinkTaskOptions): TaskInput {
       { target: "subject", comparator: "includes", value: subjectIncludes },
     ],
     mailElements: [
-      { name: "link", target: "body", selector: `a[href*='${cssString(linkIncludes)}']`, formatter: "link" },
+      { name: "loginUrl", target: "body", selector: `a[href*='${cssString(linkIncludes)}']`, formatter: "link" },
     ],
   };
 }

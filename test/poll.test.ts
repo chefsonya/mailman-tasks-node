@@ -76,7 +76,7 @@ describe("poll", { concurrency: true }, () => {
     await client.poll();
     const [seen] = api.requests("completed");
     assert.equal(seen!.headers.authorization, `Token ${api.key}`);
-    assert.equal(seen!.headers["user-agent"], "mailman-tasks-node/0.1.0");
+    assert.equal(seen!.headers["user-agent"], "mailman-tasks-node/0.2.0");
     assert.ok(!seen!.url.includes(api.key));
   });
 });
