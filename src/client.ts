@@ -910,6 +910,8 @@ function parseCompleted(text: string): { results: TaskResult[]; count: number } 
     const result: TaskResult = { id: task.id, status: task.status as TaskStatus };
     if (isObject(task.results)) {
       result.results = Object.fromEntries(Object.entries(task.results).map(([key, value]) => [key, String(value)]));
+    } else if (result.status === "success") {
+      result.results = {}; // nothing was extracted
     }
     results.push(result);
   }
