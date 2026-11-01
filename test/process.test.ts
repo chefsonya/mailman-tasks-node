@@ -23,7 +23,11 @@ async function runChild(api: MockApi, body: string, clientOptions = ""): Promise
     ${body}
     console.log("done");
   `;
-  const child = spawn(process.execPath, ["--input-type=module", "-e", script], { stdio: ["ignore", "pipe", "pipe"] });
+  const child = spawn(process.execPath, ["--input-type=module", "-e", script], {
+    stdio: ["ignore", "pipe", "pipe"],
+    // Plain output: a colour terminal (FORCE_COLOR) would put escape codes in what the tests match.
+    env: { ...process.env, FORCE_COLOR: "0", NO_COLOR: "1" },
+  });
   let stdout = "";
   let stderr = "";
   let doneAt = 0;
