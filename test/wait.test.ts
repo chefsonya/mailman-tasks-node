@@ -12,6 +12,13 @@ import { autoFinish, FAST, gaps, harness, sleep, task, TOLERANCE, until } from "
 const ok = (code: string) => ({ status: "success" as const, results: { code } });
 
 describe("run", { concurrency: true }, () => {
+  it("returns an empty results object when success omits results", async (t) => {
+    const { api, client } = await harness(t);
+    api.onCreate = () => ({ afterMs: 5, result: { status: "success" } });
+    const result = await client.run(task());
+    assert.deepEqual(result.results, {});
+  });
+
   it("creates the task, waits for it and returns the successful result", async (t) => {
     const { api, client } = await harness(t);
     autoFinish(api, { code: "482913" });

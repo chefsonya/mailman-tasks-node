@@ -89,6 +89,20 @@ describe("error classes", () => {
 });
 
 describe("mapping answers to errors", () => {
+  it("preserves normal error types and status for HTML and empty error bodies", () => {
+    for (const body of ["<html>error</html>", ""]) {
+      for (const [status, Class] of [
+        [400, InvalidRequestError], [401, AuthError], [408, RequestTimeoutError],
+        [413, PayloadTooLargeError], [429, RateLimitError], [503, ServerBusyError],
+        [500, MailmanError], [502, MailmanError],
+      ] as const) {
+        const error = errorFor(answer(status, body), redact);
+        assert.equal(error.constructor, Class);
+        assert.equal(error.status, status);
+      }
+    }
+  });
+
   it("maps every documented status to its class", () => {
     const cases: Array<[ReturnType<typeof answer>, new (...args: any[]) => MailmanError, number]> = [
       [answer(400, '{"error":"invalid task JSON"}'), InvalidRequestError, 400],

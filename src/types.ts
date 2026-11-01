@@ -53,7 +53,7 @@ export type TaskStatus = "success" | "error" | "timeout";
 export interface TaskResult {
   id: string;
   status: TaskStatus;
-  /** success: element name to extracted text. error: `errorStatus` and `errorMessage`. timeout: absent. */
+  /** success: element name to extracted text, `{}` when nothing was extracted. error: `errorStatus` and `errorMessage`. timeout: absent. */
   results?: Record<string, string>;
 }
 

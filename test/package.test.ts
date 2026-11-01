@@ -10,9 +10,9 @@ const manifest = JSON.parse(readFileSync(new URL("package.json", root), "utf8"))
 const require = createRequire(import.meta.url);
 
 describe("the package", () => {
-  it("is mailman-tasks 0.1.0 under the MIT license, and the version in the code matches", () => {
+  it("is mailman-tasks 0.2.0 under the MIT license, and the version in the code matches", () => {
     assert.equal(manifest.name, "mailman-tasks");
-    assert.equal(manifest.version, "0.1.0");
+    assert.equal(manifest.version, "0.2.0");
     assert.equal(manifest.license, "MIT");
     assert.equal(VERSION, manifest.version);
     assert.ok(readFileSync(new URL("LICENSE", root), "utf8").startsWith("MIT License"));

@@ -60,7 +60,7 @@ describe("linkTask", () => {
         { target: "from", comparator: "includes", value: "noreply@example.com" },
         { target: "subject", comparator: "includes", value: "Sign in" },
       ],
-      mailElements: [{ name: "link", target: "body", selector: "a[href*='/login']", formatter: "link" }],
+      mailElements: [{ name: "loginUrl", target: "body", selector: "a[href*='/login']", formatter: "link" }],
     });
   });
 

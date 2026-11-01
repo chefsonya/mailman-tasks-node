@@ -27,7 +27,7 @@ describe("createTask: request and defaults", { concurrency: true }, () => {
     assert.equal(seen!.method, "POST");
     assert.equal(seen!.url, "/api/v1/tasks/mail/create");
     assert.equal(seen!.headers.authorization, `Token ${api.key}`);
-    assert.equal(seen!.headers["user-agent"], "mailman-tasks-node/0.1.0");
+    assert.equal(seen!.headers["user-agent"], "mailman-tasks-node/0.2.0");
     assert.equal(seen!.headers["content-type"], "application/json");
     const body = JSON.parse(seen!.body);
     assert.equal(body.group, "default");

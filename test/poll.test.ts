@@ -30,6 +30,15 @@ describe("poll", { concurrency: true }, () => {
     assert.ok(api.requests("completed").every((seen) => seen.group === "g"));
   });
 
+  it("gives a success without results an empty results object in poll, wait and a repeat wait", async (t) => {
+    const { api, client } = await harness(t);
+    const id = await client.createTask(task());
+    api.finish(id, { status: "success" });
+    assert.deepEqual(await client.poll(), [{ id, status: "success", results: {} }]);
+    assert.deepEqual(await client.wait(id), { id, status: "success", results: {} });
+    assert.deepEqual(await client.wait(id), { id, status: "success", results: {} });
+  });
+
   it("answers {tasks: []} as an empty list, and a second poll returns nothing (M7)", async (t) => {
     const { api, client } = await harness(t);
     const id = await client.createTask(task());
@@ -76,7 +85,7 @@ describe("poll", { concurrency: true }, () => {
     await client.poll();
     const [seen] = api.requests("completed");
     assert.equal(seen!.headers.authorization, `Token ${api.key}`);
-    assert.equal(seen!.headers["user-agent"], "mailman-tasks-node/0.1.0");
+    assert.equal(seen!.headers["user-agent"], "mailman-tasks-node/0.2.0");
     assert.ok(!seen!.url.includes(api.key));
   });
 });
